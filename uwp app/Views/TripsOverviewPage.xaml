@@ -1,0 +1,42 @@
+﻿<Page
+    x:Class="uwp_app.Views.TripsOverviewPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Style="{StaticResource PageStyle}"
+    mc:Ignorable="d">
+    <Grid
+        x:Name="ContentArea"
+        Margin="{StaticResource MediumLeftRightMargin}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock
+            Grid.Row="0"
+            x:Uid="TripsOverview_Title"
+            Style="{StaticResource PageTitleStyle}" />
+        <Grid
+            Grid.Row="1" 
+            Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+            <!--The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
+                Place your content here.-->
+
+            <RelativePanel VerticalAlignment="Center" HorizontalAlignment="Center" >
+
+
+                <TextBlock  x:Name="TripsToComeLabel" Text="Planned trips" Margin="10"></TextBlock>
+                <Button x:Name="PlanTripButton" Content="Plan Trips"  VerticalAlignment="Top" Background="DarkGoldenrod" HorizontalAlignment="Left"
+                         Command="{x:Bind ViewModel.ViewPlanTripCommand}" RelativePanel.RightOf="TripsToComeLabel" Margin="10"></Button>
+                <ListView x:Name="TripsToCome" ItemsSource="{Binding CommingTrips}" Background="Goldenrod" Width="500px" Height="700px"  SelectionMode="Single"
+                      IsItemClickEnabled="True" ItemClick="{x:Bind ViewModel.ClickItemListToCome}" RelativePanel.Below="PlanTripButton" Margin="10"></ListView>
+                <TextBlock  x:Name="TripsPastLabel" Text="Past trips" Margin="530, 10" HorizontalAlignment="Right" VerticalAlignment="Stretch" />
+                <ListView x:Name="TripsPast" ItemsSource="{Binding PastTrips}" Background="Goldenrod" Width="500px" Height="700px"  SelectionMode="Single"
+                      IsItemClickEnabled="True" ItemClick="{x:Bind ViewModel.ClickItemListPast}" RelativePanel.RightOf="TripsToCome" RelativePanel.Below="PlanTripButton" Margin="10">
+                </ListView>
+            </RelativePanel>
+        </Grid>
+    </Grid>
+</Page>

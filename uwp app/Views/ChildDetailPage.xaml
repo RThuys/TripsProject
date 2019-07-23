@@ -1,0 +1,44 @@
+﻿<Page
+    x:Class="uwp_app.Views.ChildDetailPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:uwp_app.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+   Style="{StaticResource PageStyle}"
+    mc:Ignorable="d">
+
+    <Grid
+        x:Name="ContentArea"
+        Margin="{StaticResource MediumLeftRightMargin}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock
+            Grid.Row="0"
+            x:Uid="ChildDetail_Title"
+            Style="{StaticResource PageTitleStyle}" />
+        <Grid
+            Grid.Row="1" 
+            Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+            <!--The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
+                Place your content here.-->
+
+            <RelativePanel VerticalAlignment="Center" HorizontalAlignment="Center" >
+                <TextBlock x:Name="FirstNameTextBox" Margin="10"  Width="500" Height="50" FontSize="27" 
+                         Text="{x:Bind ViewModel._FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                <TextBlock x:Name="LastNameTextBox" Margin="10"  Width="500" Height="50" FontSize="27" RelativePanel.Below="FirstNameTextBox"
+                         Text="{x:Bind ViewModel._LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                <TextBox x:Name="ClassTextBox" Margin="10"  Width="500" Height="50" FontSize="27" Background="Goldenrod" RelativePanel.Below="LastNameTextBox"
+                         Text="{x:Bind ViewModel._Class, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <Button  x:Name="UpdateChild" RelativePanel.Below="ClassTextBox"  Margin="10" Height="40" Background="DarkGoldenrod" Content="Update Child" Width="500" Command="{x:Bind ViewModel.SaveChild}"></Button>
+                <Image x:Name="QR" RelativePanel.Below="UpdateChild" Height="500" Width="500" Margin="10" Source="{x:Bind ViewModel.QRImage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Button x:Name="DeleteChild" RelativePanel.Below="QR"  Margin="10" Height="40" Background="DarkGoldenrod" Content="Delete Child" Width="500" Command="{x:Bind ViewModel.DeleteChildCommand}"></Button>
+
+            </RelativePanel>
+
+        </Grid>
+    </Grid>
+</Page>

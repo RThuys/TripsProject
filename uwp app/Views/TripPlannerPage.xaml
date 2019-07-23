@@ -1,0 +1,36 @@
+﻿<Page
+    x:Class="uwp_app.Views.TripPlannerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Style="{StaticResource PageStyle}"
+    mc:Ignorable="d">
+    <Grid
+        x:Name="ContentArea"
+        Margin="{StaticResource MediumLeftRightMargin}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock
+            Grid.Row="0"
+            x:Uid="TripPlanner_Title"
+            Style="{StaticResource PageTitleStyle}" />
+        <Grid
+            Grid.Row="1" 
+            Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+            <!--The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
+                Place your content here.-->
+            <RelativePanel VerticalAlignment="Center" HorizontalAlignment="Center" >
+                <TextBox x:Name="TripTitle" Margin="10"  Width="500" Height="50" FontSize="27" Background="Goldenrod"
+                         Text="{x:Bind ViewModel._Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <ComboBox x:Name="SupervisorComboBox" Margin="10"  Width="500" Height="50" FontSize="27" Background="Goldenrod" RelativePanel.Below="TripTitle" ItemsSource="{Binding Supervisors}" SelectionChanged="SupervisorComboBox_SelectionChanged"></ComboBox>
+                <CalendarDatePicker x:Name="DatePicker" Margin="10"  Width="500" Height="50" FontSize="27" Background="Goldenrod" RelativePanel.Below="SupervisorComboBox"
+                        MinDate="{x:Bind ViewModel.BindDate}" ></CalendarDatePicker>
+                <Button RelativePanel.Below="DatePicker"  Margin="10" Height="40" Background="DarkGoldenrod" Content="Plan trip" Width="500"   Command="{x:Bind ViewModel.RegisterTrip}"></Button>
+            </RelativePanel>
+        </Grid>
+    </Grid>
+</Page>

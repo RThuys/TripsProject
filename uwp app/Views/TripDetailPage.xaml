@@ -1,0 +1,43 @@
+﻿<Page
+    x:Class="uwp_app.Views.TripDetailPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Style="{StaticResource PageStyle}"
+    mc:Ignorable="d">
+    <Grid
+        x:Name="ContentArea"
+        Margin="{StaticResource MediumLeftRightMargin}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock
+            Grid.Row="0"
+            x:Uid="TripDetail_Title"
+            Style="{StaticResource PageTitleStyle}" />
+        <Grid
+            Grid.Row="1" 
+            Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+            <!--The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
+                Place your content here.-->
+
+            <RelativePanel VerticalAlignment="Center" HorizontalAlignment="Center" >
+                <TextBlock x:Name="TripTitleTextBox" Margin="10"  Width="500" Height="50" FontSize="27" 
+                         Text="{x:Bind ViewModel._Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                <TextBlock x:Name="SupervisorNameTextBox" Margin="10"  Width="500" Height="50" FontSize="27" RelativePanel.RightOf="TripTitleTextBox"
+                         Text="{x:Bind ViewModel.Supervisor.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                <TextBlock x:Name="DateTextBox" Margin="10"  Width="500" Height="50" FontSize="27" RelativePanel.Below="TripTitleTextBox"
+                         Text="{x:Bind ViewModel._Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                <ListView x:Name="ChildrenListView" ItemClick="{x:Bind ViewModel.ClickItemList}" IsItemClickEnabled="True" SelectionMode="Multiple" Width="500" Height="300"
+                     RelativePanel.Below="DateTextBox" Margin="10" ItemsSource="{Binding Children}" Background="Goldenrod" SelectedItem="{x:Bind ViewModel._Childs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <ListView x:Name="AddedChildren"  IsItemClickEnabled="True" ItemClick="{x:Bind ViewModel.ClickedChild}" Width="500" Height="300"
+                     RelativePanel.RightOf="ChildrenListView" RelativePanel.Below="DateTextBox" Margin="10" ItemsSource="{Binding ChildrenAdded}" Background="Goldenrod" />
+                <Button x:Name="UpdateChild" RelativePanel.Below="ChildrenListView"  Margin="10" Height="40" Background="DarkGoldenrod" Content="Add Children to trip" Width="500" Command="{x:Bind ViewModel.UpdateTripCommand}"></Button>
+                <Button x:Name="DeleteChild" RelativePanel.Below="UpdateChild"  Margin="10" Height="40" Background="DarkGoldenrod" Content="Delete Trip" Width="500" Command="{x:Bind ViewModel.DeleteTripCommand}"></Button>
+            </RelativePanel>
+        </Grid>
+    </Grid>
+</Page>
