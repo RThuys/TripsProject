@@ -3,11 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="mobile.Views.ProfilePage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-            <Label x:Name="errorLabel" Text="{Binding ErrorLabel, Mode=TwoWay}"></Label>
+        <StackLayout >
+            <StackLayout VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand">
+            <Label  FontSize="Medium" Text="Welcome to your profile!"></Label>
+            <Label FontSize="Large" x:Name="profileString" Text="{Binding SupervisorName, Mode=TwoWay}" HorizontalOptions="CenterAndExpand"></Label>
+                <Button x:Name="Editbutton" Text="Edit username"></Button>
+            </StackLayout>
+            <Button x:Name="LogoutButton" Text="Logout" Command="{Binding LogoutCommand}"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

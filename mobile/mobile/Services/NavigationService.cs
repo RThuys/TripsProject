@@ -1,5 +1,6 @@
 ﻿using mobile.Bootstrap;
 using mobile.Interfaces;
+using mobile.Models;
 using mobile.ViewModels;
 using mobile.Views;
 using System;
@@ -32,8 +33,8 @@ namespace mobile.Services
 
         public async Task InitializeAsync()
         {
-            //TODO 
-            var loggedIn = false;
+            List<Supervisor> test = App.Database.GetSupervisorsAsync().Result;
+            var loggedIn = (test.Count == 0 ? false : true);
             if (loggedIn == true)
             {
                 await NavigateToAsync<HomePageViewModel>();
