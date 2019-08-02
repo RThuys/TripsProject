@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="mobile.Views.HomePage">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand">
+            <Button Text="All children" 
+                HorizontalOptions="CenterAndExpand" Command="{Binding Childrencommand}"></Button>
+            <Button Text="All Trips" 
+                HorizontalOptions="CenterAndExpand" Command="{Binding TripsCommand}"></Button>
+            </StackLayout>
+            <Button Text="Profile" VerticalOptions="End" Command="{Binding ProfileCommand}"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

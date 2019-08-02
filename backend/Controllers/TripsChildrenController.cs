@@ -29,7 +29,7 @@ namespace backend.Controllers
 
         // GET: api/TripsChildren/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get([FromRoute] int id)
+        public Task<IActionResult> Get([FromRoute] int id)
         {
             return null;
         }

@@ -134,6 +134,7 @@
     <Compile Include="Services\WindowManagerService.cs" />
     <Compile Include="ViewModels\ChildrenOverviewViewModel.cs" />
     <Compile Include="ViewModels\ChildrenRegistrationViewModel.cs" />
+    <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ShellContentDialogViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
