@@ -3,6 +3,7 @@ using Autofac;
 using mobile.Interfaces;
 using mobile.Repository;
 using mobile.Services;
+using mobile.Services.Data;
 using mobile.ViewModels;
 
 namespace mobile.Bootstrap
@@ -25,11 +26,10 @@ namespace mobile.Bootstrap
 
 
             //services - data
-            //builder.RegisterType<CatalogDataService>().As<ICatalogDataService>();
+            builder.RegisterType<ChildDataService>().As<IChildDataService>();
 
 
             //services - general
-            //builder.RegisterType<ConnectionService>().As<IConnectionService>();
             builder.RegisterType<NavigationService>().As<INavigationService>();
 
             //General

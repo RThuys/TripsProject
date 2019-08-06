@@ -45,5 +45,10 @@ namespace mobile.Services.Data
         {
             return _database.DeleteAsync(supervisor);
         }
+
+        public Task<int> UpdateSuperVisor(Supervisor supervisor)
+        {
+            return _database.UpdateAsync(supervisor);
+        }
     }
 }

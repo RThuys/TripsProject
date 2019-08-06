@@ -4,9 +4,11 @@
              x:Class="mobile.Views.TripsDetailPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Button Text="Click"  
+                x:Name="btnScan"  
+                 Command="{Binding ButtonClickedCommand}"/>
+            <Entry x:Name="txtBarcode"  
+               Placeholder="Text Do scan"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

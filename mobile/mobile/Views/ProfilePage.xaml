@@ -6,11 +6,14 @@
         <StackLayout >
             <StackLayout VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand">
-            <Label  FontSize="Medium" Text="Welcome to your profile!"></Label>
-            <Label FontSize="Large" x:Name="profileString" Text="{Binding SupervisorName, Mode=TwoWay}" HorizontalOptions="CenterAndExpand"></Label>
-                <Button x:Name="Editbutton" Text="Edit username"></Button>
+                <Label  FontSize="Medium" Text="{Binding GetWelcomeText}"></Label>
+                <Label FontSize="Large" x:Name="profileString" Text="{Binding SupervisorName, Mode=TwoWay}" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsNameLabelVisible}"></Label>
+                <Entry x:Name="NameInputField" Placeholder="New username" WidthRequest="100"  Text="{Binding UserName, Mode=TwoWay}" IsVisible="{Binding IsNameEntryVisible}"/>
+                <Button x:Name="SaveUsername" Text="Save username" Command="{Binding SaveCommand}" IsVisible="{Binding IsSaveVisible}"></Button>
+                <ImageButton x:Name="ImageEditButton"  WidthRequest="50"  HeightRequest="50"  BackgroundColor="Transparent"  Source="edit.png" Command="{Binding EditUsernameCommand}" IsVisible="{Binding IsEditButtonVisible}"></ImageButton>
             </StackLayout>
-            <Button x:Name="LogoutButton" Text="Logout" Command="{Binding LogoutCommand}"></Button>
+            <Button x:Name="Cancel" Text="Cancel" Command="{Binding CancelCommand}" IsVisible="{Binding IsCancelvisible}"></Button>
+            <Button x:Name="LogoutButton" Text="Logout"  Command="{Binding LogoutCommand}" IsVisible="{Binding IsLogoutVisible}"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

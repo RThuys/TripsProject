@@ -9,7 +9,7 @@ namespace uwp_app.Services
 {
     class DatabaseHelper
     {
-        public static string URL = "http://localhost:53025/api";
+        public static string URL = "http://127.0.0.1:53025/api";
 
         public static async Task<string> CreateClient(string url)
         {

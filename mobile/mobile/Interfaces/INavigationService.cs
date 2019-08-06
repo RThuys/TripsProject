@@ -15,6 +15,8 @@ namespace mobile.Interfaces
 
         Task NavigateToAsync<TViewModel>(object parameter) where TViewModel : ViewModelBase;
 
+        Task NavigateToAsync(Page page);
+
         Task NavigateToAsync(Type viewModelType);
 
         Task ClearBackStack();

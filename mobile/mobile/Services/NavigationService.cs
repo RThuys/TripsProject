@@ -70,6 +70,12 @@ namespace mobile.Services
             return InternalNavigateToAsync(viewModelType, parameter);
         }
 
+        public async Task NavigateToAsync(Page page)
+        {
+            var navigationPage = CurrentApplication.MainPage as ProjNavigationPage;
+            await navigationPage.PushAsync(page);
+        }
+
         public Task PopToRootAsync()
         {
             throw new NotImplementedException();
