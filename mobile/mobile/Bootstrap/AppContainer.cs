@@ -27,6 +27,7 @@ namespace mobile.Bootstrap
 
             //services - data
             builder.RegisterType<ChildDataService>().As<IChildDataService>();
+            builder.RegisterType<TripDataService>().As<ITripDataService>();
 
 
             //services - general

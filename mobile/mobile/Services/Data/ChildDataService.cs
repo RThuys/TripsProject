@@ -21,13 +21,8 @@ namespace mobile.Services.Data
         }
 
         public async Task<IEnumerable<Child>> GetAllChildren()
-        {
-
-            HttpClient client = new HttpClient();
-            string response = await client.GetStringAsync(Api.BASE_URL + Api.CHILDREN_API);
-
+        { 
             var children = await _genericRepository.GetAsync<List<Child>>(Api.BASE_URL + Api.CHILDREN_API);
-            //var children = await 
             return children;
         }
 
