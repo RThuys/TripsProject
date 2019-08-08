@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using ZXing.Mobile;
@@ -17,6 +18,11 @@ namespace mobile.ViewModels
             ) : base(navigationService)
         {
 
+        }
+
+        public override async Task InitializeAsync(Object Trip)
+        {
+            Console.WriteLine();
         }
 
         public ICommand ButtonClickedCommand => new Command(ButtonClick);
