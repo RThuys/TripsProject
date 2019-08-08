@@ -6,17 +6,17 @@
         <StackLayout>
             <StackLayout Orientation="Horizontal">
             <Button Text="Start Scanning"  x:Name="btnScan"  Command="{Binding ButtonClickedCommand}" WidthRequest="200"/>
-                <Button Text="Reset Scan"  x:Name="btnReset"  Command="{Binding ButtonClickedCommand}" WidthRequest="200"/>
+                <Button Text="Reset Scan"  x:Name="btnReset"  Command="{Binding ButtonClickedResetCommand}" WidthRequest="200"/>
             </StackLayout>
-            <ListView ItemsSource="{Binding Children}" VerticalOptions="CenterAndExpand">
+            <ListView ItemsSource="{Binding TripChildren}" VerticalOptions="CenterAndExpand">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout BackgroundColor="#eee"
                         Orientation="Vertical">
                                 <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding Name}"/>
-                                    <Label Text="{Binding LastName}"/>
+                                    <Label Text="{Binding Name}" WidthRequest="300"/>
+                                    <Label Text="{Binding Scanned}" HorizontalOptions="End"/>
 
                                 </StackLayout>
                             </StackLayout>
