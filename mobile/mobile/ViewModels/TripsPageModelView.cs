@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace mobile.ViewModels
 {
-    public class TripsPageModelView: ViewModelBase
+    public class TripsPageModelView : ViewModelBase
     {
         private readonly ITripDataService _tripDataService;
         private ObservableCollection<Trip> _allTrips;
@@ -23,6 +23,9 @@ namespace mobile.ViewModels
             PastTrips = new ObservableCollection<Trip>();
             GetTrips("future");
         }
+
+        public TripsPageModelView(INavigationService navigationService) : base(navigationService) {
+         }
 
         public ObservableCollection<Trip> Trips
         {
@@ -59,8 +62,9 @@ namespace mobile.ViewModels
                         _temp.Add(trip);
                     }
                 }
-               
-            } else
+
+            }
+            else
             {
                 foreach (Trip trip in _allTrips)
                 {
@@ -124,6 +128,20 @@ namespace mobile.ViewModels
                 {
                     _isFutureTripVisible = value;
                     OnPropertyChanged("IsFutureTripsVisible");
+                }
+            }
+        }
+
+        private Trip _selectedTrip { get; set; }
+        public Trip SelectedTrip
+        {
+            get { return _selectedTrip;  }
+            set
+            {
+                if (_selectedTrip != value)
+                {
+                    _selectedTrip = value;
+                    _navigationService.NavigateToAsync<TripsDetailPageModelView>(value);
                 }
             }
         }

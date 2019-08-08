@@ -33,6 +33,8 @@ namespace uwp_app.ViewModels
                 return new CommandHandler(() => this.test());
             }
         }
+
+        //TODO change to later date
         private void test()
         {
 

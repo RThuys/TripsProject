@@ -2,27 +2,28 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="mobile.Views.TripsPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                <Button Text="Past Trips" WidthRequest="400" IsVisible="{Binding IsPastTripsVisible}" Command="{Binding ViewPastTripsCommand}"></Button>
-                <Button Text="Trips to Come" WidthRequest="400" IsVisible="{Binding IsFutureTripsVisible}" Command="{Binding ViewFutureTripsCommand}"></Button>
-            </StackLayout>
-            <ListView ItemsSource="{Binding Trips}" VerticalOptions="CenterAndExpand">
+
+    <StackLayout>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+            <Button Text="Past Trips" WidthRequest="400" IsVisible="{Binding IsPastTripsVisible}" Command="{Binding ViewPastTripsCommand}"></Button>
+            <Button Text="Trips to Come" WidthRequest="400" IsVisible="{Binding IsFutureTripsVisible}" Command="{Binding ViewFutureTripsCommand}"></Button>
+        </StackLayout>
+        <ListView ItemsSource="{Binding Trips}" VerticalOptions="CenterAndExpand" SelectedItem="{Binding SelectedTrip}"  >
+           
+
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout BackgroundColor="#eee"
                         Orientation="Vertical">
                             <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding Title}"/>
+                                <Label Text="{Binding Title}"/>
 
-                                </StackLayout>
+                            </StackLayout>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        </StackLayout>
-    </ContentPage.Content>
+    </StackLayout>
 </ContentPage>

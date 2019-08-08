@@ -4,11 +4,26 @@
              x:Class="mobile.Views.TripsDetailPage">
     <ContentPage.Content>
         <StackLayout>
-            <Button Text="Click"  
-                x:Name="btnScan"  
-                 Command="{Binding ButtonClickedCommand}"/>
-            <Entry x:Name="txtBarcode"  
-               Placeholder="Text Do scan"/>
+            <StackLayout Orientation="Horizontal">
+            <Button Text="Start Scanning"  x:Name="btnScan"  Command="{Binding ButtonClickedCommand}" WidthRequest="200"/>
+                <Button Text="Reset Scan"  x:Name="btnReset"  Command="{Binding ButtonClickedCommand}" WidthRequest="200"/>
+            </StackLayout>
+            <ListView ItemsSource="{Binding Children}" VerticalOptions="CenterAndExpand">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout BackgroundColor="#eee"
+                        Orientation="Vertical">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Name}"/>
+                                    <Label Text="{Binding LastName}"/>
+
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
