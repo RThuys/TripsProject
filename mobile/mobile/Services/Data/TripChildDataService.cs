@@ -25,6 +25,12 @@ namespace mobile.Services.Data
             return tripChild;
         }
 
+        public async Task<IEnumerable<TripChild>> GetAlTripsChildrenByTripId(int id)
+        {
+            var tripChild = await _genericRepository.GetAsync<List<TripChild>>(Api.BASE_URL + Api.TRIPS_CHILDREN_GET_CHILDREN_API + id);
+            return tripChild;
+        }
+
         public Task<TripChild> GetTripChild(int ChildId)
         {
             throw new NotImplementedException();

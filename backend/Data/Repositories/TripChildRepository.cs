@@ -29,9 +29,16 @@ namespace backend.Data.Repositories
             return await _context.TripChildren.ToListAsync();
         }
 
-        public Task<TripChild> GetTripChildById(int Id)
+        public async Task<TripChild> GetTripChildById(int Id)
         {
-            throw new NotImplementedException();
+            return await _context.TripChildren.FirstOrDefaultAsync(trip => trip.Id == Id);
+        }
+
+        public async Task<IEnumerable<TripChild>> GetTripChildByTripId(int tripId)
+        {
+            string query = "SELECT * FROM TripChildren tc join Children c on tc.ChildId = c.Id Where tc.TripId = {0}";
+            return await _context.TripChildren.FromSql(query, tripId).ToListAsync();
+           
         }
 
         public Task RemoveTripChild(int Id)

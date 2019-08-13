@@ -13,9 +13,8 @@ namespace backend.Data.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public int TripId { get; set; }
-        public Trip Trip { get; set; }
         public int ChildId { get; set; } 
-        public Child Child { get; set; }
         public bool Scanned { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -72,6 +72,10 @@ namespace mobile.ViewModels
             }
             TripChildren = temp;
             Console.WriteLine();
+
+            TripChildren = (await _tripChildDataService.GetAlTripsChildrenByTripId(trip.Id)).ToObservableCollection();
+
+            Console.WriteLine();
         }
 
         public ObservableCollection<Child> Children

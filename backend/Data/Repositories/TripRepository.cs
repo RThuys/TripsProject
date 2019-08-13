@@ -38,15 +38,6 @@ namespace backend.Data.Repositories
                         Title = trip.Title,
                         SupervisorId = trip.SupervisorId,
                         Date = trip.Date
-                       // Children = trip.TripChildren.Select (tt => tt.Child).ToList(),
-                       // Scans = trip.Scans.Select( scan => new Scan
-                       //    {
-                       //      Id= scan.Id,
-                       //    Name = scan.Name,
-                       //    TripId = scan.TripId,
-                       //    ChildIds = scan.ChildScans.Select(ts => ts.ChildId).ToArray()
-                       //}
-                       // ).ToList()
                     }
                 )
                 .FirstOrDefaultAsync();
@@ -61,25 +52,6 @@ namespace backend.Data.Repositories
             {
                 throw new KeyNotFoundException("This supervisor does not exist");
             }
-
-           
-           /* Trip.ChildIds.ToList().ForEach(id =>
-            {
-                if (_appDbContext.Children.Find (id) == null)
-                {
-                    throw new KeyNotFoundException("Could not find Child with id: " + id);
-                }
-
-                var tt = new TripChild
-                {
-                    ChildId = id,
-                    Trip = Trip,
-                };
-                
-                _appDbContext.TripChildren.Add(tt);
-            });*/
-
-           
 
             await _appDbContext.SaveChangesAsync();
             return returnable.Entity;

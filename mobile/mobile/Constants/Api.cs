@@ -11,5 +11,6 @@ namespace mobile.Constants
         public const string CHILDREN_API = "/Children";
         public const string TRIPS_API = "/Trips";
         public const string TRIPS_CHILDREN_API = "/TripsChildren";
+        public const string TRIPS_CHILDREN_GET_CHILDREN_API = "/TripsChildren/Children/";
     }
 }

@@ -29,9 +29,16 @@ namespace backend.Controllers
 
         // GET: api/TripsChildren/5
         [HttpGet("{id}")]
-        public Task<IActionResult> Get([FromRoute] int id)
+        public async Task<IActionResult> Get([FromRoute] int id)
         {
-            return null;
+            return Ok(await _repo.GetTripChildById(id));
+        }
+
+        // GET: api/TripsChildren/Children/5
+        [HttpGet("Children/{id}")]
+        public async Task<IActionResult> GetChildrenFromTripId([FromRoute] int id)
+        {
+            return Ok(await _repo.GetTripChildByTripId(id));
         }
 
         // POST: api/TripsChildren

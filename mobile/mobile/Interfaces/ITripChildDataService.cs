@@ -9,6 +9,7 @@ namespace mobile.Interfaces
     public interface ITripChildDataService
     {
         Task<IEnumerable<TripChild>> GetAlTripsChildren();
+        Task<IEnumerable<TripChild>> GetAlTripsChildrenByTripId(int id);
         Task<TripChild> GetTripChild(int ChildId);
     }
 }
