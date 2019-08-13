@@ -28,13 +28,7 @@ namespace uwp_app.Views
            
         }
 
-        public ICommand SaveChild
-        {
-            get
-            {
-                return new CommandHandler(() => this.UpdateChild());
-            }
-        }
+        public ICommand SaveChild => new CommandHandler(() => this.UpdateChild());
 
         private void UpdateChild()
         {
@@ -65,15 +59,8 @@ namespace uwp_app.Views
 
         private void DeleteChild()
         {
-            
-            DeleteChild(_Id);
+            DatabaseHelper.Delete(URL, $"{_Id}");
             MenuNavigationHelper.UpdateView(typeof(MainPage));
-        }
-
-
-        public void DeleteChild(int id)
-        {
-            DatabaseHelper.Delete(URL, $"{id}");
         }
 
         internal void UpdateChild(Child child)
@@ -81,9 +68,7 @@ namespace uwp_app.Views
             _Id = child.Id;
             _FirstName = child.Name;
             _LastName = child.LastName;
-            _Class = child.Class;
-
-            
+            _Class = child.Class;   
         }
 
         internal void SetQR()

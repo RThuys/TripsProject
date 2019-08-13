@@ -14,10 +14,13 @@ namespace mobile.ViewModels
 
         private string _userName;
         private string _errorLabel;
-        
 
-        public MainPageViewModel(INavigationService navigationService) : base(navigationService)
+        private readonly ISupervisorDataService _supervisorDataService;
+
+
+        public MainPageViewModel(INavigationService navigationService, ISupervisorDataService supervisorDataService) : base(navigationService)
         {
+            _supervisorDataService = supervisorDataService;
         }
 
         public ICommand LoginCommand => new Command(OnClickLogin);
@@ -41,6 +44,7 @@ namespace mobile.ViewModels
                 OnPropertyChanged();
             }
         }
+        private string _supervisor;
 
         private async void OnClickLogin()
         {
@@ -49,10 +53,23 @@ namespace mobile.ViewModels
                 var supervisor = new Supervisor();
                 supervisor.Name = _userName;
                 await App.Database.SaveSupervisorAsync(supervisor);
+                
+                    Supervisor supervisorObject = new Supervisor
+                    {
+                        Name = _userName
+                    };
+            _supervisor = Newtonsoft.Json.JsonConvert.SerializeObject(supervisorObject);
+                    PostSupervisor(_supervisor);
+               
                 await _navigationService.NavigateToAsync<HomePageViewModel>();
             }
             else
                 ErrorLabel = "Please fill a in a username";
+        }
+
+        public void PostSupervisor(string tripSupervisor)
+        {
+            _supervisorDataService.AddSupervisor(tripSupervisor);
         }
     }
 }

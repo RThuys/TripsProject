@@ -10,7 +10,8 @@ namespace backend.Data.Repositories.Interfaces
     {
         Task<IEnumerable<TripChild>> GetAllTripsChildren();
         Task<TripChild> GetTripChildById(int Id);
-        Task<IEnumerable<TripChild>> GetTripChildByTripId(int tripId);
+        Task<IEnumerable<TripChild>> GetTripChildrenByTripId(int Id);
+        Task<IEnumerable<Child>> GetTripChildrenByTripIdChildren(int tripId);
         Task<TripChild> AddTripChild(TripChild TripChild);
         Task<TripChild> UpdateTripChild(TripChild TripChild);
         Task RemoveTripChild(int Id);

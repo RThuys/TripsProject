@@ -17,7 +17,8 @@ namespace uwp_app.ViewModels
         public string URL = "/Trips";
         public string _Title { get; set; } = "Title";
         public Supervisor _Supervisor { get; set; } = superv ;
-        public DateTime _Date { get; set; } = DateTime.Now;
+        public DateTimeOffset _Date { get; set; } = DateTimeOffset.Now;
+        public string _testdate ="";
 
         private string _trip;
 
@@ -34,19 +35,38 @@ namespace uwp_app.ViewModels
             }
         }
 
-        //TODO change to later date
+        //TODO hour not correct
         private void test()
         {
-
-            Trip trip = new Trip
+                try
             {
-                Title = _Title,
-                SupervisorId = _Supervisor.Id,
-                Date = _Date
-            };
-            _trip = Newtonsoft.Json.JsonConvert.SerializeObject(trip);
-            PostTrip(_trip);
-            MenuNavigationHelper.UpdateView(typeof(MainPage));
+                Trip trip = new Trip
+                {
+                    Title = _Title,
+                    SupervisorId = _Supervisor.Id,
+                    Date = _Date.DateTime
+                };
+                _trip = Newtonsoft.Json.JsonConvert.SerializeObject(trip);
+                PostTrip(_trip);
+                MenuNavigationHelper.UpdateView(typeof(MainPage));
+            }
+            catch (NullReferenceException ex)
+            {
+                //TODO Implement not a correct filled in form
+            }
+        }
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            try
+            {
+                DateTime date = (DateTime)value;
+                return new DateTimeOffset(date);
+            }
+            catch (Exception ex)
+            {
+                return DateTimeOffset.MinValue;
+            }
         }
 
 
@@ -63,6 +83,13 @@ namespace uwp_app.ViewModels
             }
         }
 
+        public void testtis()
+        {
+            Console.WriteLine();
+        }
+
+  
+
         private List<Supervisor> _supervisors;
         public List<Supervisor> Supervisors
         {
@@ -77,7 +104,10 @@ namespace uwp_app.ViewModels
             string response = await DatabaseHelper.CreateClient(url);
             var data = JsonConvert.DeserializeObject<List<Supervisor>>(response);
             Supervisors = data;
-            superv = data[1];
+            if (data.Count != 0)
+            {
+                superv = data[1];
+            };
         }
     }
 }

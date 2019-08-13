@@ -36,15 +36,5 @@ namespace mobile.ViewModels
         {
             _navigationService.NavigateToAsync<ProfilePageModelView>();
         }
-
-
-
-        public override async Task InitializeAsync(object data)
-        {
-            await Task.WhenAll
-            (
-                //_navigationService.NavigateToAsync<HomeViewModel>()
-            );
-        }
     }
 }

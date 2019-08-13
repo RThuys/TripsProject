@@ -2,7 +2,7 @@
 
 namespace backend.Migrations
 {
-    public partial class change_tripChildren : Migration
+    public partial class initializeAGAIN : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

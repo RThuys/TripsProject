@@ -29,6 +29,8 @@ namespace mobile.Bootstrap
             builder.RegisterType<ChildDataService>().As<IChildDataService>();
             builder.RegisterType<TripDataService>().As<ITripDataService>();
             builder.RegisterType<TripChildDataService>().As<ITripChildDataService>();
+            builder.RegisterType<SupervisorApiDataService>().As<ISupervisorDataService>();
+
 
 
             //services - general

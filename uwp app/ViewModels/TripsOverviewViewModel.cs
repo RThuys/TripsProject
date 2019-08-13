@@ -21,23 +21,11 @@ namespace uwp_app.ViewModels
 
         async void ApiCall(string url)
         {
+            string pastTripsString = await DatabaseHelper.CreateClient(url+"/past");
+            PastTrips = JsonConvert.DeserializeObject<List<Trip>>(pastTripsString);
 
-            string response = await DatabaseHelper.CreateClient(url);
-
-            var data = JsonConvert.DeserializeObject<List<Trip>>(response);
-            List<Trip> pastTrips = new List<Trip>();
-            List<Trip> upcommingTrips = new List<Trip>();
-            foreach (var trip in data) {
-                if (trip.Date.Date < DateTime.Now.Date)
-                {
-                    pastTrips.Add(trip);
-                } else
-                {
-                    upcommingTrips.Add(trip);
-                }
-            }
-            if (pastTrips.Count != 0) PastTrips = pastTrips;
-            if (upcommingTrips.Count != 0) CommingTrips = upcommingTrips;
+            string futureTripsString = await DatabaseHelper.CreateClient(url + "/future");
+            CommingTrips = JsonConvert.DeserializeObject<List<Trip>>(futureTripsString);
         }
 
         public ICommand ViewPlanTripCommand => _viewPlanTripCommand ?? (_viewPlanTripCommand = new RelayCommand(OnTripPlanOverview));

@@ -8,8 +8,9 @@ namespace mobile.Interfaces
 {
     public interface ISupervisorDataService
     {
-        Task AddSupervisor(Supervisor supervisor);
+        Task<string> AddSupervisor(string supervisor);
         Task<Supervisor> GetSupervisor();
+        Task<Supervisor> AddSupervisor();
 
         //DEMO purpose
         Task<Supervisor> DeleteSupervisor();

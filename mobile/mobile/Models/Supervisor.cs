@@ -7,8 +7,7 @@ namespace mobile.Models
 {
     public class Supervisor
     {
-        [PrimaryKey, AutoIncrement]
-        public int SupervisorID { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
     }
 }

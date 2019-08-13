@@ -11,6 +11,7 @@ namespace mobile.Services.Data
     public class SupervisorDataService
     {
         readonly SQLiteAsyncConnection _database;
+        private readonly IGenericRepository _genericRepository;
 
         public SupervisorDataService(string dbPath)
         {
@@ -26,13 +27,13 @@ namespace mobile.Services.Data
         public Task<Supervisor> GetSupervisorAsync(int id)
         {
             return _database.Table<Supervisor>()
-                .Where(i => i.SupervisorID == id)
+                .Where(i => i.Id == id)
                 .FirstOrDefaultAsync();
         }
 
         public Task<int> SaveSupervisorAsync(Supervisor supervisor)
         {
-            if (supervisor.SupervisorID != 0)
+            if (supervisor.Id != 0)
             {
                 return _database.UpdateAsync(supervisor);
             } else
@@ -49,6 +50,11 @@ namespace mobile.Services.Data
         public Task<int> UpdateSuperVisor(Supervisor supervisor)
         {
             return _database.UpdateAsync(supervisor);
+        }
+
+        public Task<string> AddSupervisor(String supervisor)
+        {
+            return _genericRepository.PostAsync("/Supervisors", supervisor);
         }
     }
 }

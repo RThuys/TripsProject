@@ -61,7 +61,7 @@ namespace mobile.Repository
             try
             {
                 HttpClient httpClient = CreateHttpClient(uri);
-
+                var test = JsonConvert.SerializeObject(data);
                 var content = new StringContent(JsonConvert.SerializeObject(data));
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 

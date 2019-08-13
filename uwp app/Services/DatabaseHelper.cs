@@ -13,10 +13,17 @@ namespace uwp_app.Services
 
         public static async Task<string> CreateClient(string url)
         {
-            url = URL + url;
-            HttpClient client = new HttpClient();
-            string response = await client.GetStringAsync(url);
-            return response;
+            try
+            {
+                url = URL + url;
+                HttpClient client = new HttpClient();
+                string response = await client.GetStringAsync(url);
+                return response;
+            }
+            catch (NotImplementedException ex)
+            {
+                return null;
+            };
         }
 
         public static async void Post(string path, string json)

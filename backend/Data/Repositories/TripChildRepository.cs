@@ -34,11 +34,25 @@ namespace backend.Data.Repositories
             return await _context.TripChildren.FirstOrDefaultAsync(trip => trip.Id == Id);
         }
 
-        public async Task<IEnumerable<TripChild>> GetTripChildByTripId(int tripId)
+        public async Task<IEnumerable<TripChild>> GetTripChildrenByTripId(int tripId)
         {
-            string query = "SELECT * FROM TripChildren tc join Children c on tc.ChildId = c.Id Where tc.TripId = {0}";
+            string query = "SELECT * FROM TripChildren tc Where tc.TripId = {0}";
             return await _context.TripChildren.FromSql(query, tripId).ToListAsync();
-           
+
+        }
+
+        public async Task<IEnumerable<Child>> GetTripChildrenByTripIdChildren(int tripId)
+        {
+            string query = "SELECT * FROM TripChildren tc Where tc.TripId = {0}";
+            string queryChildren = "SELECT * from Children where id = {0}";
+            List<TripChild> tripChildren  = await _context.TripChildren.FromSql(query, tripId).ToListAsync();
+            List<Child> children = new List<Child>();
+            foreach(TripChild child in tripChildren)
+            {
+                children.Add(_context.Children.FromSql(queryChildren, child.ChildId).FirstOrDefault());
+            }
+            return children;
+
         }
 
         public Task RemoveTripChild(int Id)

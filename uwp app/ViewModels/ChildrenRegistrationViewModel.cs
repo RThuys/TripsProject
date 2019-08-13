@@ -12,21 +12,23 @@ namespace uwp_app.ViewModels
 {
     public class ChildrenRegistrationViewModel : Observable
     {
+        private ICommand _viewChildDetailCommand;
+
         public string URL = "/Children";
         public string _FirstName { get; set; } = "First name";
         public string _LastName { get; set; } = "Last name";
         public string _Class { get; set; } = "testClass";
         private string _child;
 
-        public ICommand RegisterChildCommand
+        private Child child;
+
+        public ChildrenRegistrationViewModel()
         {
-            get
-            {
-                return new CommandHandler(() => this.RegisterChild());
-            }
         }
 
-        private void RegisterChild()
+        public ICommand RegisterChildCommand => new CommandHandler(() => this.RegisterChild());
+
+        private async void RegisterChild()
         {
             Child child = new Child
             {
@@ -37,23 +39,16 @@ namespace uwp_app.ViewModels
             _child = Newtonsoft.Json.JsonConvert.SerializeObject(child);
             PostChild(_child);
             MenuNavigationHelper.UpdateView(typeof(MainPage));
-            // MenuNavigationHelper.UpdateView(typeof(ChildDetailPage), child);
+
+            //TODO can't seem to get last added value from database, GetMethod (await) is alwats skipped
+            //MenuNavigationHelper.UpdateView(typeof(ChildDetailPage), child);
         }
 
-     
 
-        public void PostChild(string ChildJson)
+        public async void PostChild(string ChildJson)
         {
             DatabaseHelper.Post(URL, ChildJson);
         }
-
-        public ChildrenRegistrationViewModel()
-        {
-        }
-
-
-
-        private ICommand _viewChildDetailCommand;
 
         public ICommand ViewsChildrenOverviewCommand => _viewChildDetailCommand ?? (_viewChildDetailCommand = new RelayCommand(OnViewsChildDetail));
         

@@ -34,11 +34,18 @@ namespace backend.Controllers
             return Ok(await _repo.GetTripChildById(id));
         }
 
-        // GET: api/TripsChildren/Children/5
-        [HttpGet("Children/{id}")]
+        // GET: api/TripsChildren/Trip/5
+        [HttpGet("Trip/{id}")]
         public async Task<IActionResult> GetChildrenFromTripId([FromRoute] int id)
         {
-            return Ok(await _repo.GetTripChildByTripId(id));
+            return Ok(await _repo.GetTripChildrenByTripId(id));
+        }
+
+        // GET: api/TripsChildren/Trip/5/Children
+        [HttpGet("Trip/{id}/Children")]
+        public async Task<IActionResult> GetChildrenFromTripIdChildren([FromRoute] int id)
+        {
+            return Ok(await _repo.GetTripChildrenByTripIdChildren(id));
         }
 
         // POST: api/TripsChildren

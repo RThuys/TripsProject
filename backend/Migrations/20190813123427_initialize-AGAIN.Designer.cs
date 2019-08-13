@@ -10,8 +10,8 @@ using backend.Data.Models;
 namespace backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20190813122328_Fix-Databaseµ")]
-    partial class FixDatabaseµ
+    [Migration("20190813123427_initialize-AGAIN")]
+    partial class initializeAGAIN
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

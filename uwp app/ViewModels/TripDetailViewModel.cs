@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using uwp.Model;
@@ -18,7 +20,7 @@ namespace uwp_app.ViewModels
         public string URL = "/Trips";
         public int _Id { get; set; }
         public string _Title { get; set; }
-        public DateTime _Date { get; set; }
+        public string _Date { get; set; }
 
         private string _tripChild;
 
@@ -27,6 +29,20 @@ namespace uwp_app.ViewModels
         {
 
     }
+
+        internal void InitializeTripAsync(Trip trip)
+        {
+
+            GetSupervisor(trip);
+            GetAllChildren();
+            GetAllTripsChildren();
+            GetAllAddedChildren();
+
+            _Id = trip.Id;
+            _Title = trip.Title;
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("nl-NL");
+            _Date = trip.Date.ToShortDateString();
+        }
 
         public ICommand DeleteTripCommand
         {
@@ -100,22 +116,6 @@ namespace uwp_app.ViewModels
             TripsChildren = data;
             Console.WriteLine();
         }
-
-
-
-        internal void InitializeTripAsync(Trip trip)
-        {
-
-            GetSupervisor(trip);
-            GetAllChildren();
-            GetAllTripsChildren();
-            GetAllAddedChildren();
-
-            _Id = trip.Id;
-            _Title = trip.Title;
-            _Date = trip.Date;
-        }
-
 
         private Supervisor _supervisor;
         public Supervisor Supervisor

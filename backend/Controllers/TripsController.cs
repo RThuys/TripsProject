@@ -48,6 +48,24 @@ namespace backend.Controllers
             return Ok(trip);
         }
 
+        // GET: api/Trips/past
+        [HttpGet("past")]
+        public async Task<IActionResult> GetTripsPast([FromRoute] string test)
+        {
+            IEnumerable<Trip> trips = await _repository.GetAllTripsPast();
+
+            return Ok(trips);
+        }
+
+        // GET: api/Trips/future
+        [HttpGet("future")]
+        public async Task<IActionResult> GetTripsFuture([FromRoute] string test)
+        {
+            IEnumerable<Trip> trips = await _repository.GetAllTripsFuture();
+
+            return Ok(trips);
+        }
+
         // POST: api/Trips
         [HttpPost]
         //public IActionResult Post([FromBody] Trip json )

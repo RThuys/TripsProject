@@ -22,10 +22,7 @@ namespace uwp_app.ViewModels
             set { Set(ref _children, value, "Children"); }
 
         }
-        public ChildrenOverviewViewModel()
-        {
-            ApiCall("/Children");
-        }
+        public ChildrenOverviewViewModel() => ApiCall("/Children");
 
         async void ApiCall(string url)
         {
@@ -39,10 +36,6 @@ namespace uwp_app.ViewModels
 
         private void OnChildRegisterOverview() => MenuNavigationHelper.UpdateView(typeof(ChildrenRegistrationPage));
 
-        public void ClickItemList(object sender, ItemClickEventArgs e)
-        {
-            var clickedItem = (Child)e.ClickedItem;
-            MenuNavigationHelper.UpdateView(typeof(ChildDetailPage), clickedItem);
-        }
+        public void ClickItemList(object sender, ItemClickEventArgs e) => MenuNavigationHelper.UpdateView(typeof(ChildDetailPage), (Child)e.ClickedItem);
     }
 }

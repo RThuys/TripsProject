@@ -23,6 +23,18 @@ namespace backend.Data.Repositories
             return await _appDbContext.Trips.ToListAsync();
         }
 
+        public async Task<IEnumerable<Trip>> GetAllTripsPast()
+        {
+            string query = "select * from Trips where DATE <= GETDATE();";
+            return await _appDbContext.Trips.FromSql(query).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Trip>> GetAllTripsFuture()
+        {
+            string query = "select * from Trips where DATE >= GETDATE();";
+            return await _appDbContext.Trips.FromSql(query).ToListAsync();
+        }
+
         public async Task<Trip> GetTripById(int tripId)
         {
             var returnable = _appDbContext.Trips.Where(t => t.Id == tripId);
@@ -70,5 +82,7 @@ namespace backend.Data.Repositories
 
             await _appDbContext.SaveChangesAsync();
         }
+
+        
     }
 }

@@ -26,9 +26,12 @@
             <RelativePanel VerticalAlignment="Center" HorizontalAlignment="Center" >
                 <TextBox x:Name="TripTitle" Margin="10"  Width="500" Height="50" FontSize="27" Background="Goldenrod"
                          Text="{x:Bind ViewModel._Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                <ComboBox x:Name="SupervisorComboBox" Margin="10"  Width="500" Height="50" FontSize="27" Background="Goldenrod" RelativePanel.Below="TripTitle" ItemsSource="{Binding Supervisors}" SelectionChanged="SupervisorComboBox_SelectionChanged"></ComboBox>
+                <ComboBox x:Name="SupervisorComboBox" Margin="10"  Width="500" Height="50" FontSize="27" Background="Goldenrod"
+                          RelativePanel.Below="TripTitle" ItemsSource="{Binding Supervisors}"
+                          SelectionChanged="SupervisorComboBox_SelectionChanged"></ComboBox>
                 <CalendarDatePicker x:Name="DatePicker" Margin="10"  Width="500" Height="50" FontSize="27" Background="Goldenrod" RelativePanel.Below="SupervisorComboBox"
-                        MinDate="{x:Bind ViewModel.BindDate}" ></CalendarDatePicker>
+                        MinDate="{x:Bind ViewModel.BindDate}" PlaceholderText="Select the date of the trip"
+                                 Date="{x:Bind ViewModel._Date , Mode=TwoWay}" DateFormat = "{}{day.integer}-{month.integer}-{year.full}"  ></CalendarDatePicker>
                 <Button RelativePanel.Below="DatePicker"  Margin="10" Height="40" Background="DarkGoldenrod" Content="Plan trip" Width="500"   Command="{x:Bind ViewModel.RegisterTrip}"></Button>
             </RelativePanel>
         </Grid>

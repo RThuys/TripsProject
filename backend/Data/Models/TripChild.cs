@@ -15,6 +15,5 @@ namespace backend.Data.Models
         public int TripId { get; set; }
         public int ChildId { get; set; } 
         public bool Scanned { get; set; }
-        public string Name { get; set; }
     }
 }
