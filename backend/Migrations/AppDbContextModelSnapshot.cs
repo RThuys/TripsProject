@@ -80,24 +80,7 @@ namespace backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ChildId");
-
-                    b.HasIndex("TripId");
-
                     b.ToTable("TripChildren");
-                });
-
-            modelBuilder.Entity("backend.Data.Models.TripChild", b =>
-                {
-                    b.HasOne("backend.Data.Models.Child", "Child")
-                        .WithMany()
-                        .HasForeignKey("ChildId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("backend.Data.Models.Trip", "Trip")
-                        .WithMany()
-                        .HasForeignKey("TripId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

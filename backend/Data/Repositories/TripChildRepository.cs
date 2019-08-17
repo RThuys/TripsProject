@@ -55,6 +55,24 @@ namespace backend.Data.Repositories
 
         }
 
+        public async Task<IEnumerable<Child>> GetTripChildrenByTripIdChildrenNot(int tripId)
+        {
+            string query = "SELECT * FROM TripChildren tc Where tc.TripId = {0}";
+            string queryChildren = "SELECT * from Children where id = {0}";
+            List<TripChild> tripChildren = await _context.TripChildren.FromSql(query, tripId).ToListAsync();
+            List<Child> children = new List<Child>();
+            List<Child> AllChildren = await _context.Children.ToListAsync();
+            foreach (TripChild child in tripChildren)
+            {
+                children.Add(_context.Children.FromSql(queryChildren, child.ChildId).FirstOrDefault());
+            }
+
+            List<Child> childrenNotInTrip = AllChildren.Except(children).ToList();
+
+            return childrenNotInTrip;
+
+        }
+
         public Task RemoveTripChild(int Id)
         {
             throw new NotImplementedException();

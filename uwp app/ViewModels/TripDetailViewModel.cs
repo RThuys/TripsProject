@@ -21,6 +21,7 @@ namespace uwp_app.ViewModels
         public int _Id { get; set; }
         public string _Title { get; set; }
         public string _Date { get; set; }
+        public Trip trip;
 
         private string _tripChild;
 
@@ -32,44 +33,38 @@ namespace uwp_app.ViewModels
 
         internal void InitializeTripAsync(Trip trip)
         {
-
-            GetSupervisor(trip);
-            GetAllChildren();
-            GetAllTripsChildren();
-            GetAllAddedChildren();
-
+            this.trip = trip;
             _Id = trip.Id;
             _Title = trip.Title;
             Thread.CurrentThread.CurrentCulture = new CultureInfo("nl-NL");
             _Date = trip.Date.ToShortDateString();
+
+            GetSupervisor(trip);
+            GetAllTripsChildren();
+            GetAllChildren();
+            GetAllAddedChildren();
+
+            
         }
 
-        public ICommand DeleteTripCommand
+        public ICommand DeleteTripCommand => new CommandHandler(() => this.DeleteTrip());
+
+        private async void DeleteTrip()
         {
-            get
+            ContentDialog noPrintingDialog = new ContentDialog()
             {
-                return new CommandHandler(() => this.DeleteTrip());
-            }
-        }
-
-        private void DeleteTrip()
-        {
-
+                Title = "Not Implemented error",
+                Content = "\nSorry, We have not yet implemented this feature on purpose.",
+                PrimaryButtonText = "OK"
+            };
+            await noPrintingDialog.ShowAsync();
 
         }
 
-        public ICommand UpdateTripCommand
-        {
-            get
-            {
-                return new CommandHandler(() => this.UpdateTrip());
-            }
-        }
+        public ICommand UpdateTripCommand => new CommandHandler(() => this.UpdateTrip());
 
         private void UpdateTrip()
         {
-
-            Console.Write(_Childs);
             if (_Childs != null)
             {
                 foreach (Child child in _Childs)
@@ -113,8 +108,8 @@ namespace uwp_app.ViewModels
         {
             string response = await DatabaseHelper.CreateClient("/TripsChildren");
             var data = JsonConvert.DeserializeObject<List<TripChild>>(response);
+
             TripsChildren = data;
-            Console.WriteLine();
         }
 
         private Supervisor _supervisor;
@@ -142,8 +137,10 @@ namespace uwp_app.ViewModels
 
         private async void GetAllChildren()
         {
-            string response = await DatabaseHelper.CreateClient("/Children");
+            string response = await DatabaseHelper.CreateClient("/TripsChildren/Trip/" + _Id + "/ChildrenNot");
             var data = JsonConvert.DeserializeObject<List<Child>>(response);
+
+           
             Children = data;
         }
 
@@ -176,31 +173,40 @@ namespace uwp_app.ViewModels
 
         private async void GetAllAddedChildren()
         {
-            string response = await DatabaseHelper.CreateClient("/TripsChildren");
-            var data = JsonConvert.DeserializeObject<List<TripChild>>(response);
-            List<Child> data2 = new List<Child>();
-
-            foreach(var temp in data)
-            {
-                if (temp.TripId == _Id && Children != null)
-                {
-                    foreach(Child child in Children)
-                    {
-                        if (temp.ChildId == child.Id)
-                        {
-                            data2.Add(child);
-                        }
-                    }
-                    
-                }
-            }
-            ChildrenAdded = data2;
+            string response = await DatabaseHelper.CreateClient("/TripsChildren/Trip/" + _Id + "/Children");
+            var data = JsonConvert.DeserializeObject<List<Child>>(response);
+           
+            ChildrenAdded = data;
         }
 
         public void ClickedChild(object sender, ItemClickEventArgs e)
         {
             var clickedItem = (Child)e.ClickedItem;
             MenuNavigationHelper.UpdateView(typeof(ChildDetailPage), clickedItem);
+        }
+
+
+        private async void temp()
+        {
+            string response = await DatabaseHelper.CreateClient("/TripsChildren");
+            var data = JsonConvert.DeserializeObject<List<TripChild>>(response);
+            List<Child> data2 = new List<Child>();
+
+            foreach (var temp in data)
+            {
+                if (temp.TripId == _Id && Children != null)
+                {
+                    foreach (Child child in Children)
+                    {
+                        if (temp.ChildId == child.Id)
+                        {
+                            data2.Add(child);
+                        }
+                    }
+
+                }
+            }
+            ChildrenAdded = data2;
         }
     }
 }

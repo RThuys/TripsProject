@@ -10,8 +10,8 @@ using backend.Data.Models;
 namespace backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20190813123427_initialize-AGAIN")]
-    partial class initializeAGAIN
+    [Migration("20190817122608_attempt_for_azure_migration")]
+    partial class attempt_for_azure_migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -82,24 +82,7 @@ namespace backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ChildId");
-
-                    b.HasIndex("TripId");
-
                     b.ToTable("TripChildren");
-                });
-
-            modelBuilder.Entity("backend.Data.Models.TripChild", b =>
-                {
-                    b.HasOne("backend.Data.Models.Child", "Child")
-                        .WithMany()
-                        .HasForeignKey("ChildId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("backend.Data.Models.Trip", "Trip")
-                        .WithMany()
-                        .HasForeignKey("TripId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

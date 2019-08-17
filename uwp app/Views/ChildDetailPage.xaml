@@ -35,9 +35,11 @@
                          Text="{x:Bind ViewModel._Class, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 <Button  x:Name="UpdateChild" RelativePanel.Below="ClassTextBox"  Margin="10" Height="40" Background="DarkGoldenrod" Content="Update Child" Width="500" Command="{x:Bind ViewModel.SaveChild}"></Button>
                 <Image x:Name="QR" RelativePanel.Below="UpdateChild" Height="500" Width="500" Margin="10" Source="{x:Bind ViewModel.QRImage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <Button x:Name="DeleteChild" RelativePanel.Below="QR"  Margin="10" Height="40" Background="DarkGoldenrod" Content="Delete Child" Width="500" Command="{x:Bind ViewModel.DeleteChildCommand}"></Button>
+                <Button x:Name="InvokePrintingButton" RelativePanel.Below="QR" Content="Print QR code"  Command="{x:Bind ViewModel.PrintCommand}"  Margin="10" Height="40" Background="DarkGoldenrod" Width="500"/>
+                <Button x:Name="DeleteChild" RelativePanel.Below="InvokePrintingButton"  Margin="10" Height="40" Background="DarkGoldenrod" Content="Delete Child" Width="500" Command="{x:Bind ViewModel.DeleteChildCommand}"></Button>
 
             </RelativePanel>
+
 
         </Grid>
     </Grid>

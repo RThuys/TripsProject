@@ -4,9 +4,14 @@ using System.Windows.Input;
 using uwp.Model;
 using uwp_app.Helpers;
 using uwp_app.Services;
+using Windows.ApplicationModel.Core;
+using Windows.Graphics.Printing;
+using Windows.UI.Core;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Printing;
 using ZXing;
 using ZXing.Mobile;
 using ZXing.QrCode;
@@ -23,12 +28,20 @@ namespace uwp_app.Views
         private string _child;
         public WriteableBitmap QRImage { get; set; }
 
+
+        private PrintManager printMan;
+        private PrintDocument printDoc;
+        private IPrintDocumentSource printDocSource;
+
         public ChildDetailViewModel()
         {
            
         }
 
         public ICommand SaveChild => new CommandHandler(() => this.UpdateChild());
+        public ICommand DeleteChildCommand => new CommandHandler(() => this.DeleteChild());
+        public ICommand PrintCommand => new CommandHandler(() => this.PrintQr());
+
 
         private void UpdateChild()
         {
@@ -49,13 +62,7 @@ namespace uwp_app.Views
             DatabaseHelper.Put(URL, ChildJson);
         }
 
-        public ICommand DeleteChildCommand
-        {
-            get
-            {
-                return new CommandHandler(() => this.DeleteChild());
-            }
-        }
+        
 
         private void DeleteChild()
         {
@@ -85,6 +92,41 @@ namespace uwp_app.Views
             writer.Format = BarcodeFormat.QR_CODE;
             writer.Options = options;
             QRImage = writer.Write(_Id + " " + _FirstName +" "+ _LastName);
+        }
+
+        private async void PrintQr()
+        {
+            if (PrintManager.IsSupported())
+            {
+                try
+                {
+                    // Show print UI
+                    await PrintManager.ShowPrintUIAsync();
+
+                }
+                catch
+                {
+                    // Printing cannot proceed at this time
+                    ContentDialog noPrintingDialog = new ContentDialog()
+                    {
+                        Title = "Printing error",
+                        Content = "\nSorry, printing can' t proceed at this time.",
+                        PrimaryButtonText = "OK"
+                    };
+                    await noPrintingDialog.ShowAsync();
+                }
+            }
+            else
+            {
+                // Printing is not supported on this device
+                ContentDialog noPrintingDialog = new ContentDialog()
+                {
+                    Title = "Printing not supported",
+                    Content = "\nSorry, printing is not supported on this device.",
+                    PrimaryButtonText = "OK"
+                };
+                await noPrintingDialog.ShowAsync();
+            }
         }
     }
 }

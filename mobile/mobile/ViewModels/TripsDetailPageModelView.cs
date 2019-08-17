@@ -34,9 +34,7 @@ namespace mobile.ViewModels
 
         public override async Task InitializeAsync(Object tripSelected)
         {
-            Console.WriteLine();
             trip = (Trip)tripSelected;
-            Console.WriteLine();
             GetTripsChildren();
         }
 
@@ -71,7 +69,6 @@ namespace mobile.ViewModels
                 }
             }
             TripChildren = temp;
-            Console.WriteLine();
 
             TripChildren = (await _tripChildDataService.GetAlTripsChildrenByTripId(trip.Id)).ToObservableCollection();
 
@@ -91,13 +88,7 @@ namespace mobile.ViewModels
         private async void GetChildren()
         {
             Children = (await _childDataService.GetAllChildren()).ToObservableCollection();
-            Console.WriteLine();
         }
-
-
-
-
-
 
         public ICommand ButtonClickedCommand => new Command(ButtonClick);
 
@@ -132,7 +123,7 @@ namespace mobile.ViewModels
                     overlay.BottomText = "You just scanned: " + scan.Name;
                     foreach (TripChild item in _tripChildren)
                     {
-                        if (item.ChildId == scan.Id)
+                        if (item.Id == scan.Id)
                         {
                             item.Scanned = true;
                             TripChildren = new ObservableCollection<TripChild>(_tripChildren);

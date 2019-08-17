@@ -27,7 +27,7 @@ namespace mobile.Services.Data
 
         public async Task<IEnumerable<TripChild>> GetAlTripsChildrenByTripId(int id)
         {
-            var tripChild = await _genericRepository.GetAsync<List<TripChild>>(Api.BASE_URL + Api.TRIPS_CHILDREN_GET_CHILDREN_API + id);
+            var tripChild = await _genericRepository.GetAsync<List<TripChild>>(Api.BASE_URL + Api.TRIPS_CHILDREN_GET_CHILDREN_API + id + "/Children");
             return tripChild;
         }
 

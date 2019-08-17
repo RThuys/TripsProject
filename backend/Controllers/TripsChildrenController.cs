@@ -48,6 +48,13 @@ namespace backend.Controllers
             return Ok(await _repo.GetTripChildrenByTripIdChildren(id));
         }
 
+        // GET: api/TripsChildren/Trip/5/ChildrenNot
+        [HttpGet("Trip/{id}/ChildrenNot")]
+        public async Task<IActionResult> GetChildrenFromTripIdChildrenNot([FromRoute] int id)
+        {
+            return Ok(await _repo.GetTripChildrenByTripIdChildrenNot(id));
+        }
+
         // POST: api/TripsChildren
         [HttpPost]
         public async Task<IActionResult> PostTripChild([FromBody] TripChild tripChild)
