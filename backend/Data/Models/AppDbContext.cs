@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace backend.Data.Models
 {
@@ -20,7 +21,27 @@ namespace backend.Data.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-           
+            modelBuilder.Entity<Supervisor>(ConfigureSupervisor);
+            modelBuilder.Entity<Child>(ConfigureChild);
+            modelBuilder.Entity<Trip>(ConfifureTrip);
+            modelBuilder.Entity<TripChild>(configureTripChild);
+        }
+
+        private void configureTripChild(EntityTypeBuilder<TripChild> obj)
+        {
+        }
+
+        private void ConfifureTrip(EntityTypeBuilder<Trip> obj)
+        {
+        }
+
+        private void ConfigureChild(EntityTypeBuilder<Child> obj)
+        {
+        }
+
+        private void ConfigureSupervisor(EntityTypeBuilder<Supervisor> obj)
+        {
+            
         }
     }
 }

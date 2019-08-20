@@ -25,16 +25,20 @@
                 Place your content here.-->
 
             <RelativePanel VerticalAlignment="Center" HorizontalAlignment="Center" >
+                <TextBlock  x:Name="TripsTodayLabel" Text="Todays trips" Margin="10" Width="400"></TextBlock>
+                <ListView x:Name="TripsToday" ItemsSource="{Binding TodaysTrips}" Background="Goldenrod" Width="400px" Height="700px"  SelectionMode="Single"
+                      IsItemClickEnabled="True" ItemClick="{x:Bind ViewModel.ClickItemList}" RelativePanel.Below="PlanTripButton" Margin="10"></ListView>
 
-
-                <TextBlock  x:Name="TripsToComeLabel" Text="Planned trips" Margin="10"></TextBlock>
+                <TextBlock  x:Name="TripsToComeLabel" Text="Planned trips" HorizontalAlignment="Center" RelativePanel.RightOf="TripsTodayLabel" Margin="10" Width="280" ></TextBlock>
                 <Button x:Name="PlanTripButton" Content="Plan Trips"  VerticalAlignment="Top" Background="DarkGoldenrod" HorizontalAlignment="Left"
-                         Command="{x:Bind ViewModel.ViewPlanTripCommand}" RelativePanel.RightOf="TripsToComeLabel" Margin="10"></Button>
-                <ListView x:Name="TripsToCome" ItemsSource="{Binding CommingTrips}" Background="Goldenrod" Width="500px" Height="700px"  SelectionMode="Single"
-                      IsItemClickEnabled="True" ItemClick="{x:Bind ViewModel.ClickItemListToCome}" RelativePanel.Below="PlanTripButton" Margin="10"></ListView>
-                <TextBlock  x:Name="TripsPastLabel" Text="Past trips" Margin="530, 10" HorizontalAlignment="Right" VerticalAlignment="Stretch" />
-                <ListView x:Name="TripsPast" ItemsSource="{Binding PastTrips}" Background="Goldenrod" Width="500px" Height="700px"  SelectionMode="Single"
-                      IsItemClickEnabled="True" ItemClick="{x:Bind ViewModel.ClickItemListPast}" RelativePanel.RightOf="TripsToCome" RelativePanel.Below="PlanTripButton" Margin="10">
+                         Command="{x:Bind ViewModel.ViewPlanTripCommand}" RelativePanel.RightOf="TripsToComeLabel" Margin="10" Width="100"></Button>
+               
+                <ListView x:Name="TripsToCome" ItemsSource="{Binding CommingTrips}" Background="Goldenrod" Width="400px" Height="700px"  SelectionMode="Single"
+                      IsItemClickEnabled="True" ItemClick="{x:Bind ViewModel.ClickItemList}" RelativePanel.RightOf="TripsToday" RelativePanel.Below="PlanTripButton" Margin="10"></ListView>
+
+                <TextBlock  x:Name="TripsPastLabel" Text="Past trips" Margin="10, 10" HorizontalAlignment="Right" RelativePanel.RightOf="PlanTripButton" VerticalAlignment="Stretch" />
+                <ListView x:Name="TripsPast" ItemsSource="{Binding PastTrips}" Background="Goldenrod" Width="400px" Height="700px"  SelectionMode="Single"
+                      IsItemClickEnabled="True" ItemClick="{x:Bind ViewModel.ClickItemList}" RelativePanel.RightOf="TripsToCome" RelativePanel.Below="PlanTripButton" Margin="10">
                 </ListView>
             </RelativePanel>
         </Grid>

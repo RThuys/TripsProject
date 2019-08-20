@@ -66,6 +66,15 @@ namespace backend.Controllers
             return Ok(trips);
         }
 
+        // GET: api/Trips/today
+        [HttpGet("today")]
+        public async Task<IActionResult> GetTripsToday([FromRoute] string test)
+        {
+            IEnumerable<Trip> trips = await _repository.GetAllTripsToday();
+
+            return Ok(trips);
+        }
+
         // POST: api/Trips
         [HttpPost]
         //public IActionResult Post([FromBody] Trip json )

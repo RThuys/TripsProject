@@ -25,13 +25,19 @@ namespace backend.Data.Repositories
 
         public async Task<IEnumerable<Trip>> GetAllTripsPast()
         {
-            string query = "select * from Trips where DATE <= GETDATE();";
+            string query = "select * from Trips where DATE < GETDATE() and DATEPART(day, DATE) != DATEPART(day, GETDATE());";
             return await _appDbContext.Trips.FromSql(query).ToListAsync();
         }
 
         public async Task<IEnumerable<Trip>> GetAllTripsFuture()
         {
-            string query = "select * from Trips where DATE >= GETDATE();";
+            string query = "select * from Trips where DATE > GETDATE();";
+            return await _appDbContext.Trips.FromSql(query).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Trip>> GetAllTripsToday()
+        {
+            string query = "select * from Trips where DATEPART(day, DATE) = DATEPART(day, GETDATE());";
             return await _appDbContext.Trips.FromSql(query).ToListAsync();
         }
 

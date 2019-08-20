@@ -17,7 +17,7 @@ namespace uwp_app.ViewModels
         public string URL = "/Trips";
         public string _Title { get; set; } = "Title";
         public Supervisor _Supervisor { get; set; } = superv ;
-        public DateTimeOffset _Date { get; set; } = DateTimeOffset.Now;
+        public DateTimeOffset _Date = DateTimeOffset.Now;
         public string _testdate ="";
 
         private string _trip;
@@ -34,6 +34,8 @@ namespace uwp_app.ViewModels
                 return new CommandHandler(() => this.test());
             }
         }
+
+
 
         //TODO hour not correct
         private void test()
@@ -79,7 +81,7 @@ namespace uwp_app.ViewModels
         {
             get
             {
-                return DateTimeOffset.Now;
+                return DateTimeOffset.Now.AddDays(1);
             }
         }
 

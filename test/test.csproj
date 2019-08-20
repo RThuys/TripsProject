@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\backend\backend.csproj" />
+    <ProjectReference Include="..\mobile\mobile\mobile.csproj" />
   </ItemGroup>
 
 </Project>

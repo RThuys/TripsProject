@@ -26,6 +26,9 @@ namespace uwp_app.ViewModels
 
             string futureTripsString = await DatabaseHelper.CreateClient(url + "/future");
             CommingTrips = JsonConvert.DeserializeObject<List<Trip>>(futureTripsString);
+
+            string todaysTripsString = await DatabaseHelper.CreateClient(url + "/today");
+            TodaysTrips = JsonConvert.DeserializeObject<List<Trip>>(todaysTripsString);
         }
 
         public ICommand ViewPlanTripCommand => _viewPlanTripCommand ?? (_viewPlanTripCommand = new RelayCommand(OnTripPlanOverview));
@@ -33,13 +36,7 @@ namespace uwp_app.ViewModels
         private void OnTripPlanOverview() =>
             MenuNavigationHelper.UpdateView(typeof(TripPlannerPage));
 
-        public void ClickItemListToCome(object sender, ItemClickEventArgs e)
-        {
-            var clickedItem = (Trip)e.ClickedItem;
-            MenuNavigationHelper.UpdateView(typeof(TripDetailPage), clickedItem);
-        }
-
-        public void ClickItemListPast(object sender, ItemClickEventArgs e)
+        public void ClickItemList(object sender, ItemClickEventArgs e)
         {
             var clickedItem = (Trip)e.ClickedItem;
             MenuNavigationHelper.UpdateView(typeof(TripDetailPage), clickedItem);
@@ -59,6 +56,14 @@ namespace uwp_app.ViewModels
         {
             get { return _commingTrips; }
             set { Set(ref _commingTrips, value, "CommingTrips"); }
+
+        }
+
+        private List<Trip> _todaysTrips;
+        public List<Trip> TodaysTrips
+        {
+            get { return _todaysTrips; }
+            set { Set(ref _todaysTrips, value, "TodaysTrips"); }
 
         }
     }

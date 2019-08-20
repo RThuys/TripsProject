@@ -10,8 +10,8 @@ using backend.Data.Models;
 namespace backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20190817122608_attempt_for_azure_migration")]
-    partial class attempt_for_azure_migration
+    [Migration("20190820114117_intit-again")]
+    partial class intitagain
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

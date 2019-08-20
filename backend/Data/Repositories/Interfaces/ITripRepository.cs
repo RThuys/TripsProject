@@ -11,6 +11,7 @@ namespace backend.Data.Repositories
         Task<IEnumerable<Trip>> GetAllTrips();
         Task<IEnumerable<Trip>> GetAllTripsPast();
         Task<IEnumerable<Trip>> GetAllTripsFuture();
+        Task<IEnumerable<Trip>> GetAllTripsToday();
         Task<Trip> GetTripById(int tripId);
         Task<Trip> AddTrip(Trip Trip);
         Task RemoveTrip(int id);
