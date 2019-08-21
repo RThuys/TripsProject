@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Tests
 {
-    public class BackendUserControllerTest
+    public class BackendChilrenControllerTest
     {
         Mock<IChildRepository> childRepository;
         [SetUp]
